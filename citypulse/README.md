@@ -8,9 +8,7 @@ A smart-city Android app: report civic issues (waste, potholes, etc.),
 track live air quality and weather, and (in later phases) get AI-assisted
 triage on reported issues -- built entirely on free-tier services.
 
-**Status: Phase 3 of N -- Auth + Firestore, live AQI/Weather Dashboard, and Waste Reporting with Gemini AI photo analysis.**
-See [SETUP.md](SETUP.md) for what's implemented so far and how to run it,
-and for what's coming in later phases.
+
 
 ## Stack
 
