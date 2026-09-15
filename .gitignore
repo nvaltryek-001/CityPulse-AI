@@ -1,0 +1,73 @@
+﻿# Dependencies
+node_modules/
+**/node_modules/
+
+# Builds
+dist/
+**/dist/
+.vite/
+
+# Environment
+.env
+.env.*
+!.env.example
+!.env.production.example
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local databases and runtime data
+*.db
+*.sqlite
+*.sqlite3
+backend/data/runtime/
+backend/uploads/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# Temporary
+tmp/
+temp/
+*.local
+
+# CityPulse local backups
+.citypulse-cleanup-backup-*/
+.citypulse-step22/
+.citypulse-step22-backup-*/
+.citypulse-step23-backup-*/
+frontend-foundation-backup-*/
+frontend-repair-backup-*/
+frontend-safe-backup-*/
+frontend-visual-repair-backup-*/
+
+# Obsolete / unrelated project material
+/src/
+/citypulse/
+
+# Local verification artifacts
+/step20-3-live-test.json
+/step22-final-integration.json
+/step22-final-result.json
+/step22-offline-e2e-result.json
+/step23-sharing-result.json
+/step24-security-result.json
+/step25-production-audit.json
+/step26-github-documentation-result.json
+STEP23-NEXT.txt
+/citypulse/
+backend/src/server.js.before-middleware-fix
+backend/src/server.js.route-backup-*/
+backend/src/server.js.route-backup-*
+
+# Local BBMP raw datasets
+backend/data/bbmp/*.csv

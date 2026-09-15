@@ -1,0 +1,86 @@
+﻿.report-flow-status {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 14px 0;
+}
+
+.report-flow-step {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  text-align: center;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.report-flow-step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: calc(50% + 17px);
+  width: calc(100% - 34px);
+  height: 2px;
+  background: #e2e8f0;
+}
+
+.report-flow-step.completed:not(:last-child)::after {
+  background: #16a34a;
+}
+
+.report-flow-dot {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #f1f5f9;
+  border: 2px solid #e2e8f0;
+  position: relative;
+  z-index: 2;
+  font-size: 12px;
+}
+
+.report-flow-step.active {
+  color: #2563eb;
+}
+
+.report-flow-step.active .report-flow-dot {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: white;
+}
+
+.report-flow-step.completed {
+  color: #15803d;
+}
+
+.report-flow-step.completed .report-flow-dot {
+  background: #16a34a;
+  border-color: #16a34a;
+  color: white;
+}
+
+@media (max-width: 700px) {
+  .report-flow-status {
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding-bottom: 10px;
+  }
+
+  .report-flow-step {
+    flex: 0 0 78px;
+  }
+
+  .report-flow-label {
+    white-space: nowrap;
+    font-size: 10px;
+  }
+}

@@ -1,0 +1,44 @@
+﻿.offline-report-status {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  transform: translateX(-50%);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  max-width: calc(100vw - 32px);
+  padding: 10px 15px;
+  border-radius: 999px;
+  box-shadow:
+    0 8px 30px rgba(15, 23, 42, 0.15);
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.offline-report-status.offline-mode {
+  background: #fff7ed;
+  color: #c2410c;
+  border: 1px solid #fed7aa;
+}
+
+.offline-report-status.online-sync {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+}
+
+.offline-status-dot {
+  font-size: 9px;
+}
+
+@media (max-width: 600px) {
+
+  .offline-report-status {
+    bottom: 76px;
+    white-space: normal;
+    text-align: center;
+    justify-content: center;
+  }
+}

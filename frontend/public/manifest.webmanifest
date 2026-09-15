@@ -1,0 +1,23 @@
+﻿{
+  "name": "CityPulse AI",
+  "short_name": "CityPulse",
+  "description": "AI-powered civic issue reporting and smart city platform.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7f9f7",
+  "theme_color": "#1f7a4d",
+  "orientation": "portrait-primary",
+  "categories": [
+    "utilities",
+    "productivity",
+    "public services"
+  ],
+  "icons": [
+    {
+      "src": "/citypulse-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
