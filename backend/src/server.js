@@ -81,7 +81,7 @@ async function startServer() {
 
 
 
-app.listen(env.port, () => {
+app.listen(env.port, "0.0.0.0", () => {
       console.log("");
       console.log("======================================");
       console.log(" CITYPULSE AI BACKEND");
@@ -107,6 +107,8 @@ app.listen(env.port, () => {
 }
 
 startServer();
+
+
 
 
 
