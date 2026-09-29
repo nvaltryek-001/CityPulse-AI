@@ -98,6 +98,7 @@ export function clearReportImages() {
     localStorage.removeItem(
       IMAGE_KEY
     );
+// eslint-disable-next-line no-empty
   } catch {}
 }
 

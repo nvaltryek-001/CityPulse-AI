@@ -1,4 +1,4 @@
-﻿const DEFAULT_ANALYSIS = {
+const DEFAULT_ANALYSIS = {
   title: "Civic Issue",
   description: "",
   category: "Other",
@@ -75,7 +75,9 @@ function parseJsonText(text) {
 
   try {
     return JSON.parse(raw);
-  } catch {}
+  } catch {
+    // Intentionally ignored.
+  }
 
   const fenced =
     raw
@@ -86,7 +88,9 @@ function parseJsonText(text) {
 
   try {
     return JSON.parse(fenced);
-  } catch {}
+  } catch {
+    // Intentionally ignored.
+  }
 
   const start = fenced.indexOf("{");
   const end = fenced.lastIndexOf("}");
@@ -96,7 +100,9 @@ function parseJsonText(text) {
       return JSON.parse(
         fenced.slice(start, end + 1)
       );
-    } catch {}
+    } catch {
+    // Intentionally ignored.
+  }
   }
 
   return null;

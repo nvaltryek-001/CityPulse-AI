@@ -1,4 +1,4 @@
-﻿import mongoose from "mongoose";
+import mongoose from "mongoose";
 
 const reportSchema = new mongoose.Schema(
   {
@@ -30,12 +30,24 @@ const reportSchema = new mongoose.Schema(
         type: String,
         default: ""
       },
+
       latitude: {
         type: Number,
         default: null
       },
+
       longitude: {
         type: Number,
+        default: null
+      },
+
+      accuracy: {
+        type: Number,
+        default: null
+      },
+
+      capturedAt: {
+        type: Date,
         default: null
       }
     },
@@ -44,7 +56,7 @@ const reportSchema = new mongoose.Schema(
       type: Number,
       min: 1,
       max: 5,
-      default: 1
+      default: 3
     },
 
     priority: {
@@ -61,24 +73,27 @@ const reportSchema = new mongoose.Schema(
 
     trafficLevel: {
       type: String,
-      default: "Low"
+      default: "Medium"
     },
 
     safetyRisk: {
       type: Number,
       min: 1,
       max: 5,
-      default: 1
+      default: 3
     },
 
-    images: [
-      {
-        name: String,
-        type: String,
-        size: Number,
-        dataUrl: String
-      }
-    ],
+    department: {
+      type: String,
+      default: "Municipal Services"
+    },
+
+    images: {
+      type: [
+        mongoose.Schema.Types.Mixed
+      ],
+      default: []
+    },
 
     aiAnalysis: {
       detectedIssue: {
@@ -93,7 +108,7 @@ const reportSchema = new mongoose.Schema(
 
       severity: {
         type: Number,
-        default: 1
+        default: 0
       },
 
       priority: {
@@ -151,6 +166,26 @@ const reportSchema = new mongoose.Schema(
     source: {
       type: String,
       default: "CityPulse AI"
+    },
+
+    submittedFrom: {
+      type: String,
+      default: "web"
+    },
+
+    statusNote: {
+      type: String,
+      default: ""
+    },
+
+    statusUpdatedAt: {
+      type: Date,
+      default: null
+    },
+
+    resolvedAt: {
+      type: Date,
+      default: null
     }
   },
   {
@@ -171,6 +206,9 @@ reportSchema.index({
 
 const Report =
   mongoose.models.Report ||
-  mongoose.model("Report", reportSchema);
+  mongoose.model(
+    "Report",
+    reportSchema
+  );
 
 export default Report;

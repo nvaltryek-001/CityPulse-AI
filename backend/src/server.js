@@ -1,4 +1,4 @@
-﻿import analyticsRoutes from './routes/analyticsRoutes.js';
+import analyticsRoutes from './routes/analyticsRoutes.js';
 import geoSyncRoutes from "./routes/geoSyncRoutes.js";
 import exploreDataRoutes from "./routes/exploreDataRoutes.js";
 import nearbyIssueRoutes from "./routes/nearbyIssueRoutes.js";
@@ -18,9 +18,40 @@ import shareRoutes from "./routes/shareRoutes.js";
 
 const app = express();
 
+const allowedFrontendOrigins = new Set(
+  [
+    env.frontendUrl,
+    "http://localhost:5173",
+    "http://127.0.0.1:5173"
+  ].filter(Boolean)
+);
+
 app.use(
   cors({
-    origin: env.frontendUrl,
+    origin(origin, callback) {
+
+      if (!origin) {
+        callback(null, true);
+        return;
+      }
+
+      if (allowedFrontendOrigins.has(origin)) {
+        callback(null, true);
+        return;
+      }
+
+      if (
+        process.env.NODE_ENV !== "production" &&
+        /^http:\/\/(localhost|127\.0\.0\.1):\d+$/.test(origin)
+      ) {
+        callback(null, true);
+        return;
+      }
+
+      callback(
+        new Error("CORS origin not allowed")
+      );
+    },
     credentials: false
   })
 );
@@ -107,13 +138,3 @@ app.listen(env.port, "0.0.0.0", () => {
 }
 
 startServer();
-
-
-
-
-
-
-
-
-
-

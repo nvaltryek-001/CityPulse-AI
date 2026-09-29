@@ -3,6 +3,7 @@
   "http://localhost:5000/api";
 
 async function parseResponse(response) {
+// eslint-disable-next-line no-useless-assignment
   let data = {};
 
   try {

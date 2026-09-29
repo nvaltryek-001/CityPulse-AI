@@ -91,6 +91,7 @@ export function getDraft() {
 export function clearDraft() {
   try {
     localStorage.removeItem(KEYS.draft);
+// eslint-disable-next-line no-empty
   } catch {}
 }
 

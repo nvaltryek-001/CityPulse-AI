@@ -11,6 +11,7 @@ async function request(path, options = {}) {
     ...options
   });
 
+// eslint-disable-next-line no-useless-assignment
   let data = {};
 
   try {

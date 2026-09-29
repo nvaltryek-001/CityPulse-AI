@@ -1,4 +1,4 @@
-﻿const API_BASE =
+const API_BASE =
   import.meta.env.VITE_API_BASE_URL ||
   "http://localhost:5000/api";
 
@@ -9,7 +9,7 @@ async function request(path) {
       `${API_BASE}${path}`
     );
 
-  let data = {};
+  let data;
 
   try {
     data = await response.json();
@@ -67,13 +67,11 @@ export async function fetchAnalytics(
 }
 
 export async function fetchReportsForAnalytics() {
-
-  const response =
+const response =
     await fetch(
       `${API_BASE}/reports?limit=1000`
     );
-
-  let data = {};
+  let data;
 
   try {
     data = await response.json();

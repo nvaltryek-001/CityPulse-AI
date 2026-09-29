@@ -1,4 +1,4 @@
-﻿/**
+/**
  * ============================================================
  * CITYPULSE AI
  * LOCATION SERVICE
@@ -77,7 +77,9 @@ export function saveLocation(
       LOCATION_KEY,
       JSON.stringify(value)
     );
-  } catch {}
+  } catch {
+    // Intentionally ignored.
+  }
 
   return value;
 }
@@ -90,7 +92,9 @@ export function clearLocation() {
     localStorage.removeItem(
       LOCATION_KEY
     );
-  } catch {}
+  } catch {
+    // Intentionally ignored.
+  }
 }
 
 /**
@@ -163,6 +167,7 @@ export function getCurrentPosition(
         },
 
         (error) => {
+// eslint-disable-next-line no-useless-assignment
           let message =
             "Unable to get your location.";
 

@@ -13,6 +13,7 @@ async function request(path, options = {}) {
 
   const text = await response.text();
 
+// eslint-disable-next-line no-useless-assignment
   let data = {};
 
   try {

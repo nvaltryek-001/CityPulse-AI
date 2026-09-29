@@ -1,12 +1,31 @@
-import CivicDatasetRecord from "../models/CivicDatasetRecord.js";
+﻿import CivicDatasetRecord from "../models/CivicDatasetRecord.js";
+
+function clean(value) {
+  if (value === null || value === undefined) {
+    return "";
+  }
+
+  return String(value).trim();
+}
+
+function escapeRegex(value) {
+  return String(value).replace(
+    /[.*+?^${}()|[\]\\]/g,
+    "\\$&"
+  );
+}
 
 export async function listCivicDatasetRecords(query = {}) {
+
   const {
     category,
+    subCategory,
     status,
     wardName,
+    year,
+    search,
     source = "BBMP",
-    limit = 100
+    limit = 50
   } = query;
 
   const filter = {};
@@ -19,6 +38,10 @@ export async function listCivicDatasetRecords(query = {}) {
     filter.category = category;
   }
 
+  if (subCategory) {
+    filter.subCategory = subCategory;
+  }
+
   if (status) {
     filter.status = status;
   }
@@ -27,9 +50,39 @@ export async function listCivicDatasetRecords(query = {}) {
     filter.wardName = wardName;
   }
 
+  if (year && /^\d{4}$/.test(String(year))) {
+    filter.sourceDataset = `BBMP Grievances ${year}`;
+  }
+
+  if (search && String(search).trim()) {
+
+    const regex = new RegExp(
+      escapeRegex(String(search).trim()),
+      "i"
+    );
+
+    filter.$or = [
+      {
+        category: regex
+      },
+      {
+        subCategory: regex
+      },
+      {
+        wardName: regex
+      },
+      {
+        staffRemarks: regex
+      },
+      {
+        staffName: regex
+      }
+    ];
+  }
+
   const safeLimit = Math.min(
-    Math.max(Number(limit) || 100, 1),
-    500
+    Math.max(Number(limit) || 50, 1),
+    100
   );
 
   return CivicDatasetRecord
@@ -43,12 +96,16 @@ export async function listCivicDatasetRecords(query = {}) {
 }
 
 export async function getCivicDatasetStats() {
+
   const [
     total,
     categories,
+    subCategories,
     statuses,
-    wards
+    wards,
+    years
   ] = await Promise.all([
+
     CivicDatasetRecord.countDocuments({
       source: "BBMP"
     }),
@@ -82,11 +139,19 @@ export async function getCivicDatasetStats() {
       },
       {
         $group: {
-          _id: "$status",
+          _id: "$subCategory",
           count: {
             $sum: 1
           }
         }
+      },
+      {
+        $sort: {
+          count: -1
+        }
+      },
+      {
+        $limit: 50
       }
     ]),
 
@@ -94,6 +159,30 @@ export async function getCivicDatasetStats() {
       {
         $match: {
           source: "BBMP"
+        }
+      },
+      {
+        $group: {
+          _id: "$status",
+          count: {
+            $sum: 1
+          }
+        }
+      },
+      {
+        $sort: {
+          count: -1
+        }
+      }
+    ]),
+
+    CivicDatasetRecord.aggregate([
+      {
+        $match: {
+          source: "BBMP",
+          wardName: {
+            $nin: ["", null]
+          }
         }
       },
       {
@@ -112,13 +201,44 @@ export async function getCivicDatasetStats() {
       {
         $limit: 50
       }
+    ]),
+
+    CivicDatasetRecord.aggregate([
+      {
+        $match: {
+          source: "BBMP"
+        }
+      },
+      {
+        $group: {
+          _id: "$sourceDataset",
+          count: {
+            $sum: 1
+          }
+        }
+      },
+      {
+        $sort: {
+          _id: 1
+        }
+      }
     ])
   ]);
+
+  const yearly = years.map((item) => ({
+    year: String(item._id || "").replace(
+      "BBMP Grievances ",
+      ""
+    ),
+    count: Number(item.count) || 0
+  }));
 
   return {
     total,
     categories,
+    subCategories,
     statuses,
-    wards
+    wards,
+    years: yearly
   };
 }

@@ -7,6 +7,7 @@ async function request(path) {
   const response =
     await fetch(`${API_BASE}${path}`);
 
+// eslint-disable-next-line no-useless-assignment
   let data = {};
 
   try {

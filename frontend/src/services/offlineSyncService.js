@@ -1,6 +1,7 @@
 ﻿import {
   getPendingReports,
   updateOfflineReport,
+// eslint-disable-next-line no-unused-vars
   removeOfflineReport
 } from "./offlineDb";
 

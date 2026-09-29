@@ -1,18 +1,16 @@
-import mongoose from "mongoose";
+﻿import mongoose from "mongoose";
 
 const civicDatasetRecordSchema = new mongoose.Schema(
   {
     externalId: {
       type: String,
-      required: true,
-      index: true
+      required: true
     },
 
     source: {
       type: String,
       required: true,
-      default: "BBMP",
-      index: true
+      default: "BBMP"
     },
 
     sourceDataset: {
@@ -22,8 +20,7 @@ const civicDatasetRecordSchema = new mongoose.Schema(
 
     category: {
       type: String,
-      default: "Other",
-      index: true
+      default: "Other"
     },
 
     subCategory: {
@@ -33,20 +30,17 @@ const civicDatasetRecordSchema = new mongoose.Schema(
 
     grievanceDate: {
       type: String,
-      default: "",
-      index: true
+      default: ""
     },
 
     wardName: {
       type: String,
-      default: "",
-      index: true
+      default: ""
     },
 
     status: {
       type: String,
-      default: "open",
-      index: true
+      default: "open"
     },
 
     staffRemarks: {
@@ -91,17 +85,18 @@ const civicDatasetRecordSchema = new mongoose.Schema(
   }
 );
 
-civicDatasetRecordSchema.index({
-  externalId: 1,
-  source: 1
-}, {
-  unique: true
-});
+civicDatasetRecordSchema.index(
+  {
+    externalId: 1,
+    source: 1
+  },
+  {
+    unique: true
+  }
+);
 
 civicDatasetRecordSchema.index({
-  source: 1,
-  category: 1,
-  status: 1
+  grievanceDate: 1
 });
 
 civicDatasetRecordSchema.index({

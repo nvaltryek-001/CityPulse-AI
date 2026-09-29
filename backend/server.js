@@ -1,4 +1,4 @@
-﻿import { securityMiddleware, apiRateLimiter } from "./middleware/security.js";
+import { securityMiddleware, apiRateLimiter } from "./middleware/security.js";
 import analyticsRoutes from "./src/routes/analyticsRoutes.js";
 import geoSyncRoutes from "./routes/geoSyncRoutes.js";
 import exploreDataRoutes from "./routes/exploreDataRoutes.js";
@@ -116,5 +116,3 @@ startServer();
 
 
 app.use("/api/analytics", analyticsRoutes);
-
-

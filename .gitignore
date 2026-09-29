@@ -71,3 +71,11 @@ backend/src/server.js.route-backup-*
 
 # Local BBMP raw datasets
 backend/data/bbmp/*.csv
+backend/.env
+frontend/.env
+frontend/dist
+frontend/e2e-report
+frontend/e2e-results
+frontend/test-results
+*.before-*
+.citypulse-*backup*
