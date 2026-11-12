@@ -141,13 +141,14 @@ Historical coordinates are not fabricated where source records do not provide th
 
 ## Project Structure
 
+```text
 citypulse-ai/
-  frontend/
-  backend/
+  frontend/     React web app (Vite) + Playwright e2e tests
+  backend/      Node.js API (reports, nearby, explore, analytics) + Gemini analysis
+  citypulse/    Android app (Kotlin, Gradle) with Firebase config and Firestore rules
+  docs/         PROJECT_DOCUMENTATION.md · DEPLOYMENT_CHECKLIST.md · GITHUB_COMMIT_PREPARATION.md
   README.md
-  PROJECT_DOCUMENTATION.md
-  DEPLOYMENT_CHECKLIST.md
-  GITHUB_COMMIT_PREPARATION.md
+```
 
 ## Current Status
 
